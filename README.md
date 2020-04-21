@@ -27,4 +27,4 @@ Enter the path of the raw directory and return.
 Path name: /Users/username/.../directory
 ```
 
-A new file named 'BIDS' containing the new file structure should be created in the same directory as the raw directory, and the raw directory will remain unchanged. 
+A new file named 'BIDS' containing the new file structure will be created in the same directory as the raw directory, and the raw directory will remain unchanged. 
