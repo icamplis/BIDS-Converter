@@ -1,6 +1,6 @@
 # BIDS-Converter
 
-BIDS-Converter is a Python script used to convert a directory of .mat and .edf files into BIDS format.
+BIDS-Converter is a Python script used to convert a directory of Eyelink .mat and .edf files into BIDS format.
 
 ## Installation
 
