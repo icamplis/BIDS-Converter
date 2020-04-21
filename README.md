@@ -19,14 +19,14 @@ Navigate to the directory containing BIDS_converter.py in a terminal and run the
 python3 BIDS_converter.py
 ```
 
-A prompt will appear asking for the path of the raw data directory.
+A prompt will appear asking for the path of the data directory.
 ```bash
 Path name: 
 ```
 
-Enter the path of the raw directory and return.
+Enter the path of the directory and return.
 ```bash
 Path name: /Users/username/.../directory
 ```
 
-A new file named 'BIDS' containing the new file structure will be created in the same directory as the raw directory, and the raw directory will remain unchanged. 
+A new file named 'BIDS' containing the new file structure will be created on the same level as the original directory, and this original directory will be renamed to 'directory'_RAW. 
