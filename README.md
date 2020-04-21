@@ -13,13 +13,18 @@ pip3 install --user -r /path/requirements.txt
 ## Usage
 
 Navigate to the directory containing BIDS_converter.py in a terminal and run the script.
-
 ```bash
 python3 BIDS_converter.py
 ```
-A prompt will appear asking for the raw data directory, enter this and return.
 
+A prompt will appear asking for the path of the raw data directory.
 ```bash
-Path name: /Users/username/.../filename
+Path name: 
 ```
+
+Enter the path of the raw directory and return.
+```bash
+Path name: /Users/username/.../directory
+```
+
 A new file named 'BIDS' containing the new file structure should be created in the same directory as the raw directory, and the raw directory will remain unchanged. 
