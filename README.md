@@ -9,7 +9,7 @@ CLone or download this repository, and ensure all packages in requirements.txt a
 pip3 install --user -r /path/requirements.txt
 ```
 
-Also ensure that the **EyeLink Developers Kit for Mac OS X** is installed in Applications, by clicking on this link[https://www.sr-support.com/forum/downloads/eyelink-display-software/45-eyelink-developers-kit-for-mac-os-x-mac-os-x-display-software?15-EyeLink-Developers-Kit-for-Mac-OS-X=].
+Also ensure that the **EyeLink Developers Kit for Mac OS X** is installed in Applications, by clicking on [this link](https://www.sr-support.com/forum/downloads/eyelink-display-software/45-eyelink-developers-kit-for-mac-os-x-mac-os-x-display-software?15-EyeLink-Developers-Kit-for-Mac-OS-X=).
 
 
 ## Usage
