@@ -33,34 +33,77 @@ def make_json_individual_description(new_path):
     :return: None
     """
 
-    samplingfrequency = '?'
     fileformat = '.edf'
-    startmessage = '?'
-    endmessage = '?'
-    eventidentifier = '?'
-    pupilpositiontype = '?'
-    rawsamples = '?'
-    includedeyemovementevents = '?'
-    detectionalgorithm = '?'
-    eventreferenceframe = '?'
+    samplingfrequency, includedeyemovementevents, manufacturer, manufacturersmodelname, calibrationtype, recordedeye \
+        = json_details(new_path + '.asc')
+
 
     jsonDict = {
         'SamplingFrequency': samplingfrequency,
         'FileFormat': fileformat,
-        'StartMessage': startmessage,
-        'EndMessage': endmessage,
-        'EventIdentifier': eventidentifier,
-        'PupilPositionType': pupilpositiontype,
-        'RawSamples': rawsamples,
         'IncludedEyeMovementEvents': includedeyemovementevents,
-        'DetectionAlgorithm': detectionalgorithm,
-        'EventReferenceFrame': eventreferenceframe
+        'Manufacturer': manufacturer,
+        'ManufacturersModelName': manufacturersmodelname,
+        'CalibrationType': calibrationtype,
+        'RecordedEye': recordedeye
     }
 
     text = str(new_path) + '.json'
 
     with open(text, 'w') as json_file:
         json.dump(jsonDict, json_file)
+
+
+def json_details(path):
+    """
+    Finds and returns information for json file from ASC file
+    :param path: path to ASC file
+    :return: string variables for the sampling rate (rate), recorded events (events), manufacturer, model,
+    calibration type (calibrationtype), and recorded eye (eye).
+    """
+
+    with open(path, 'r') as f:
+        text = f.read()
+        if 'RATE' in text:
+            ind = text.split().index('RATE') + 1
+            rate = text.split()[ind]
+
+        events = []
+        if 'SFIX' in text:
+            events.append('Start of fixation: "SFIX"')
+        if 'EFIX' in text:
+            events.append('End of fixation: "EFIX"')
+        if 'SSACC' in text:
+            events.append('Start of saccade: "SSACC"')
+        if 'ESACC' in text:
+            events.append('End of saccade: "ESACC"')
+        if 'SBLINK' in text:
+            events.append('Start of blink: "SBLINK"')
+        if 'EBLINK' in text:
+            events.append('End of blink: "EBLINK"')
+
+        if 'H3' in text:
+            calibrationtype = 'H3'
+        elif 'HV9' in text:
+            calibrationtype = 'HV9'
+
+        if 'RIGHT' in text:
+            eye = 'RIGHT'
+        if 'LEFT' in text:
+            eye = 'LEFT'
+        if 'BOTH' in text:
+            eye = 'BOTH'
+
+        f.close()
+
+    with open(path, 'r') as f:
+        lines = f.readlines()
+        manufacturer = lines[4][11:-1]
+        model = lines[3][12:-1]
+
+        f.close()
+
+    return rate, events, manufacturer, model, calibrationtype, eye
 
 
 def BIDS_edf_asc_json(path, new_dr, subject_num, tasks):
@@ -104,7 +147,6 @@ def BIDS_mat(path, new_dr, subject_num, tasks):
     os.chdir(path)
 
     for file in glob.glob("*.mat"):
-        print(file.title())
         for task in tasks:
             if task.lower() in file.lower():
                 task_num = np.where(np.asarray(tasks) == task)[0][0] + 1
@@ -128,7 +170,7 @@ def directory_to_BIDS(path):
     tasks = ['trailer1', 'trailer2', 'Office1', 'Office2', 'Pixar', 'BangDead']
 
     # make new dr
-    new_dr = os.path.split(path)[0] + '/BIDS/' + 'sub-' + subject_num + '/eyetrack/'
+    new_dr = os.path.split(path)[0] + '/BIDS/' + 'sub-' + subject_num + '/eyetrack'
     os.makedirs(new_dr)
 
     BIDS_edf_asc_json(path, new_dr, subject_num, tasks)
