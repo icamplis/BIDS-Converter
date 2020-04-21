@@ -29,4 +29,4 @@ Enter the path of the directory and return.
 Path name: /Users/username/.../directory
 ```
 
-A new file named 'BIDS' containing the new file structure will be created on the same level as the original directory, and this original directory will be renamed to 'directory'_RAW. 
+A new file named 'BIDS' containing the new file structure will be created on the same level as the original directory, and this original directory will be unchanged. 
