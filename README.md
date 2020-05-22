@@ -4,7 +4,7 @@ BIDS-Converter is a Python script used to convert a directory of Eyelink .mat an
 
 ## Installation
 
-CLone or download this repository, and ensure all packages in requirements.txt are installed. This can be done by navigating to the directory containing requirements.txt in a terminal and entering:
+Clone or download this repository, and ensure all packages in requirements.txt are installed. This can be done by navigating to the directory containing requirements.txt in a terminal and entering:
 ```bash
 pip3 install --user -r /path/requirements.txt
 ```
